@@ -40,8 +40,18 @@
 // TODO EFMSecondViewController の delegateメソッドを実装
 - (void)buttonTapped{
     NSLog(@"buttonTapped");
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        EFMSecondViewController *secondViewController = [[EFMSecondViewController alloc] initWithNibName:@"EFMSecondViewController" bundle:nil];
+        secondViewController.delegate = self;
+    
+        [self presentViewController:secondViewController animated:YES completion:nil];
+        
+    }];
 }
 
+//- (void)completitionBlock{
+//    NSLog(@"completitionBlock");
+//}
 
 @end
