@@ -33,7 +33,6 @@
 
         imageView.image = [UIImage imageNamed: [NSString stringWithFormat:@"%d.jpg", [_imageViews indexOfObject:imageView]+1]];
         imageView.tag = [_imageViews indexOfObject:imageView]+1;
-        NSLog(@"%d", [_imageViews indexOfObject:imageView]);
     }
 }
 

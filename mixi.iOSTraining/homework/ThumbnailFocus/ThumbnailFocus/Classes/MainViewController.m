@@ -12,10 +12,14 @@
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) ThumbnailsViewController *thumbnailsViewController;
+@property (strong, nonatomic) IBOutlet UIView *mainView;
 
 @end
 
 @implementation MainViewController
+
+static CGRect const kPortraitViewRect = { { 32.0f, 18.0f }, { 150.0f, 150.0f } };
+static CGRect const kLandscapeViewRect = { { 180.0f, 32.0f }, { 150.0f, 150.0f } };
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -27,13 +31,29 @@
     self.view.clipsToBounds = NO;
 }
 
-#warning ⬇ HomeWork　iPadの場合は回転に対応してください。
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
-}
+#warning ⬇ HomeWork　iPadの場合は回転に対応してください。device orientationにて設定した！！
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//    NSLog(@"rotate support on ios6");
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+//}
+//
+//-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+//                                        duration:(NSTimeInterval)duration
+//{
+//    NSLog(@"will animate");
+//    if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
+//        [_contentView setFrame:kPortraitViewRect];
+//
+//    } else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight
+//               || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+//    {
+//        [_contentView setFrame:kLandscapeViewRect];
+//    }
+//}
 
-#warning ⬇ HomeWork
+
+#warning ⬇ HomeWork　スーパークラスが動いてるんじゃねぇのかな？
 /*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 // １。５０ラインからのメソッドはコメント処理したのに、なんでうまく動いているか？ 考えてみてください。
 // ２。下記は必ず覚えていきましょう

@@ -28,26 +28,26 @@ static NSTimeInterval const kDefaultOrientationAnimationDuration = 0.4;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    // ⬇Answer：
+    // ⬇Answer：UIDeviceOrientationDidChangeNotificationの通知がされた時にorientationDidChangeNotificationメソッドを呼び出すように通知要求を登録
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(orientationDidChangeNotification:)
                                                  name:UIDeviceOrientationDidChangeNotification object:nil];
-    // ⬇Answer：    
+    // ⬇Answer：デバイスの向きが変わる始まり通知を送ってる
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    // ⬇Answer：
+    // ⬇Answer：上で登録してる通知要求を削除
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    // ⬇Answer：
+    // ⬇Answer：デバイスの向きが変わる終わり通知を送ってる
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    // ⬇Answer：    
+    // ⬇Answer： 縦表示（ホームボタン下）を許可
     return UIInterfaceOrientationMaskPortrait;
 }
 
@@ -79,17 +79,21 @@ static NSTimeInterval const kDefaultOrientationAnimationDuration = 0.4;
     CGAffineTransform transform;
     NSTimeInterval duration = kDefaultOrientationAnimationDuration;
 
+//   さっき回転したのと同じなら処理を止める
     if([UIDevice currentDevice].orientation == self.previousOrientation)
         return;
 
+//    さっきと上下反転してたらdurationを倍に
     if((UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation) && UIInterfaceOrientationIsLandscape(self.previousOrientation))
        || (UIInterfaceOrientationIsPortrait([UIDevice currentDevice].orientation) && UIInterfaceOrientationIsPortrait(self.previousOrientation)))
     {
         duration *= 2;
     }
 
+//    縦になったり、対応してるOrientationなら
     if(([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait)
        || [self isParentSupportingInterfaceOrientation:(UIInterfaceOrientation)[UIDevice currentDevice].orientation]) {
+//      プロパティをもとに戻す感じ？
         transform = CGAffineTransformIdentity;
     }else {
         switch ([UIDevice currentDevice].orientation){
@@ -125,6 +129,7 @@ static NSTimeInterval const kDefaultOrientationAnimationDuration = 0.4;
     }
 
     CGRect frame = CGRectZero;
+//    アニメーションのフラグが立ってたらアニメーションさせてそうじゃなかったら一気にいく！
     if(animated) {
         frame = self.contentView.frame;
         [UIView animateWithDuration:duration
@@ -137,6 +142,7 @@ static NSTimeInterval const kDefaultOrientationAnimationDuration = 0.4;
         self.contentView.transform = transform;
         self.contentView.frame = frame;
     }
+//    今回転したOrientationを保持しとく
     self.previousOrientation = [UIDevice currentDevice].orientation;
 }
 
