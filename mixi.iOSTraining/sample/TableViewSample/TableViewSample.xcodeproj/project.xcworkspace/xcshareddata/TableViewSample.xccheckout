@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F2DB0516-E378-43DF-A397-E7AE207C752B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TableViewSample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EB04CEF1-9F65-4DFD-85CB-660496FE05A8</key>
+		<string>https://github.com/yo1106/iOSTraining.Hands-on.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mixi.iOSTraining/sample/TableViewSample/TableViewSample.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EB04CEF1-9F65-4DFD-85CB-660496FE05A8</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/yo1106/iOSTraining.Hands-on.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EB04CEF1-9F65-4DFD-85CB-660496FE05A8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EB04CEF1-9F65-4DFD-85CB-660496FE05A8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOSTraining.Hands-on</string>
+		</dict>
+	</array>
+</dict>
+</plist>
