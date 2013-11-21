@@ -10,6 +10,7 @@
 
 @interface TVSViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIRefreshControl *refreshControl;
 
 @end
 
@@ -23,6 +24,18 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
 
+
+    
+}
+
+- (void)needRefresh:(UIRefreshControl *)sender
+{
+    [self performSelector:@selector(finishRefresh) withObject:nil afterDelay:3.0];
+}
+
+- (void)finishRefresh
+{
+    [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning

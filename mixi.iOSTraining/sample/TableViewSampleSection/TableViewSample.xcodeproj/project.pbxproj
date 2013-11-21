@@ -18,6 +18,8 @@
 		5405F0641725268000C6E9F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5405F0631725268000C6E9F5 /* Default-568h@2x.png */; };
 		5405F0671725268000C6E9F5 /* TVSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5405F0661725268000C6E9F5 /* TVSViewController.m */; };
 		5405F06A1725268000C6E9F5 /* TVSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5405F0681725268000C6E9F5 /* TVSViewController.xib */; };
+		F6D2C075183E0B340066ACAC /* TVSRefreshSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D2C073183E0B340066ACAC /* TVSRefreshSampleViewController.m */; };
+		F6D2C076183E0B340066ACAC /* TVSRefreshSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D2C074183E0B340066ACAC /* TVSRefreshSampleViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,9 @@
 		5405F0651725268000C6E9F5 /* TVSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVSViewController.h; sourceTree = "<group>"; };
 		5405F0661725268000C6E9F5 /* TVSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVSViewController.m; sourceTree = "<group>"; };
 		5405F0691725268000C6E9F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TVSViewController.xib; sourceTree = "<group>"; };
+		F6D2C072183E0B340066ACAC /* TVSRefreshSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TVSRefreshSampleViewController.h; path = ../TVSRefreshSampleViewController.h; sourceTree = "<group>"; };
+		F6D2C073183E0B340066ACAC /* TVSRefreshSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TVSRefreshSampleViewController.m; path = ../TVSRefreshSampleViewController.m; sourceTree = "<group>"; };
+		F6D2C074183E0B340066ACAC /* TVSRefreshSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TVSRefreshSampleViewController.xib; path = ../TVSRefreshSampleViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,9 @@
 				5405F0651725268000C6E9F5 /* TVSViewController.h */,
 				5405F0661725268000C6E9F5 /* TVSViewController.m */,
 				5405F0681725268000C6E9F5 /* TVSViewController.xib */,
+				F6D2C072183E0B340066ACAC /* TVSRefreshSampleViewController.h */,
+				F6D2C073183E0B340066ACAC /* TVSRefreshSampleViewController.m */,
+				F6D2C074183E0B340066ACAC /* TVSRefreshSampleViewController.xib */,
 				5405F0541725268000C6E9F5 /* Supporting Files */,
 			);
 			path = TableViewSample;
@@ -163,6 +171,7 @@
 				5405F0601725268000C6E9F5 /* Default.png in Resources */,
 				5405F0621725268000C6E9F5 /* Default@2x.png in Resources */,
 				5405F0641725268000C6E9F5 /* Default-568h@2x.png in Resources */,
+				F6D2C076183E0B340066ACAC /* TVSRefreshSampleViewController.xib in Resources */,
 				5405F06A1725268000C6E9F5 /* TVSViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6D2C075183E0B340066ACAC /* TVSRefreshSampleViewController.m in Sources */,
 				5405F05A1725268000C6E9F5 /* main.m in Sources */,
 				5405F05E1725268000C6E9F5 /* TVSAppDelegate.m in Sources */,
 				5405F0671725268000C6E9F5 /* TVSViewController.m in Sources */,
