@@ -34,12 +34,16 @@
     // UIImagePickerControllerSourceTypeSavedPhotosAlbum だと直接写真選択画面
     imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     // 選択したメディアの編集を可能にするかどうか
+    // 正方形以外にするためには独自で用意する必要がある
+    // フルサイズのメディアの編集や、カスタムトリミングの指定をユーザ側ででき
+    // るようにする場合は、独自の編集用UIを提供する必要があります。
     imagePickerVC.allowsEditing = YES;
 
     // 選択可能なメディアの制限 デフォルトは photo のみ。
     // movie を選択可能にするには
     imagePickerVC.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:imagePickerVC.sourceType];
     imagePickerVC.delegate = self;
+    
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -49,15 +53,29 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
 
-    //Cropした位置情報取得だぜ
-    CGRect rect;
-    [[info objectForKey:UIImagePickerControllerCropRect] getValue:&rect];
-    
     UIImage *originImage = info[UIImagePickerControllerOriginalImage];
+
+    //Cropした位置情報取得だぜ
+    CGRect rect = CGRectZero;
+    [[info objectForKey:UIImagePickerControllerCropRect] getValue:&rect];
+    NSLog(@"rect:%@", NSStringFromCGRect(rect));
+
+    /*
+    * UIImageのCGImageはOrientationを無視するので、
+    * drawInRectで再生性
+    * http://blog.katty.in/105
+    */
+    UIGraphicsBeginImageContext(originImage.size);
+    [originImage drawInRect:CGRectMake(0, 0, originImage.size.width, originImage.size.height)];
+    originImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     CGImageRef imageRef = CGImageCreateWithImageInRect(originImage.CGImage, rect);
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
-    [_photoImageView setImage:croppedImage];
-}
 
+
+    self.photoImageView.image = croppedImage;
+    NSLog(@"size:%f, %f", croppedImage.size.width, croppedImage.size.height);
+}
 
 @end
