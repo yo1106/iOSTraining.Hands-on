@@ -52,8 +52,11 @@
     //Cropした位置情報取得だぜ
     CGRect rect;
     [[info objectForKey:UIImagePickerControllerCropRect] getValue:&rect];
-
-    [_photoImageView setImage:info[UIImagePickerControllerOriginalImage]];
+    
+    UIImage *originImage = info[UIImagePickerControllerOriginalImage];
+    CGImageRef imageRef = CGImageCreateWithImageInRect(originImage.CGImage, rect);
+    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
+    [_photoImageView setImage:croppedImage];
 }
 
 
