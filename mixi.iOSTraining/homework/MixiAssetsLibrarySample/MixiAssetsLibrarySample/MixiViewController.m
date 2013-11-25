@@ -64,8 +64,10 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [asset valueForProperty:ALAssetPropertyDate]];
     [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    NSLog(@"%@", _selectedAssets);
     return cell;
 }
+
 
 #pragma mark - UITableViewDelegate methods
 
