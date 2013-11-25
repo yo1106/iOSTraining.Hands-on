@@ -70,6 +70,13 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [asset valueForProperty:ALAssetPropertyDate]];
     [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    //選択されてるインデックスを保持しておく。
+    if([self.selectedIndices containsObject:indexPath]){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
 }
 
@@ -78,9 +85,21 @@
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     // TODO : accessoryType が UITableViewCellAccessoryNone だったら UITableViewCellAccessoryCheckmark を、逆なら None を設定する
+    if(cell.accessoryType == UITableViewCellAccessoryNone){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    NSLog(@"%@", cell.textLabel.text);
     //TODO : 選択された場合 index を _selectedIndices に add する、選択解除された場合 _selectedIndices から index を削除する
-
+    if(cell.accessoryType == UITableViewCellAccessoryCheckmark){
+        [_selectedIndices addObject:indexPath];
+    }else{
+        [_selectedIndices removeObject:indexPath];
+    }
+    
     //TODO : このままだと _selectedIndices は順番が cell がおかしいので、_selectedIndices をソートする必要がある。ここでソートする。
+    NSLog(@"%@", _selectedIndices);
 }
 
 #pragma mark - private methods
