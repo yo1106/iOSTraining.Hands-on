@@ -13,7 +13,7 @@
 @property (strong, nonatomic) ALAssetsGroup *assetsGroup;
 @property (strong, nonatomic) NSMutableArray *assets;
 @property (strong, nonatomic) NSMutableArray *selectedIndices;
-@property (strong, nonatomic) NSMutableArray *selectedAssets;
+@property (strong, nonatomic) NSMutableArray *selectedAssetsURL;
 
 @property (weak, nonatomic) IBOutlet UITableView *assetsTableView;
 
@@ -111,15 +111,17 @@
 -(void)pressDoneButton
 {
     //TODO : _selectedAssets初期化
-    self.selectedAssets = [NSMutableArray array];
+    self.selectedAssetsURL = [NSMutableArray array];
 
     //TODO : _selectedIndices に入ってる index の　asset を _assets から取得して、_selectedAssets に add する。
     for(NSIndexPath *index in self.selectedIndices){
-        [self.selectedAssets addObject:self.assets[(long)index.row]];
+        ALAsset *asset = self.assets[(long)index.row];
+        NSString *assetURL = [[asset valueForProperty:ALAssetPropertyURLs] objectForKey:[[asset defaultRepresentation] UTI]];
+        [self.selectedAssetsURL addObject:assetURL];
     }
 
     //TODO : delegate methods コールして assets 渡す
-    [self.delegate assetsViewControllerDidSelectedPhotos:self.selectedAssets];
+    [self.delegate assetsViewControllerDidSelectedPhotos:self.selectedAssetsURL];
 }
 
 

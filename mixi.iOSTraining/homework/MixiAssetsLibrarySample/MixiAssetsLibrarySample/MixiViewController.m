@@ -11,7 +11,7 @@
 
 @interface MixiViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *selectedPhotoTableView;
-@property (strong, nonatomic) NSArray *selectedAssets;
+@property (strong, nonatomic) NSArray *selectedAssetsURL;
 
 - (IBAction)pressShowAssetsGroupButton:(id)sender;
 @end
@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    _selectedAssets = [NSArray array];
+    self.selectedAssetsURL = [NSArray array];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,17 +40,18 @@
 }
 
 #pragma mark - MixiAssetsViewControllerDelegate methods
--(void)assetsViewControllerDidSelectedPhotos:(NSArray *)assets
+-(void)assetsViewControllerDidSelectedPhotos:(NSArray *)assetsURL
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    _selectedAssets = assets;
+    self.selectedAssetsURL = assetsURL;
     [_selectedPhotoTableView reloadData];
 }
 
 #pragma mark - UITableViewDatasource methods
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_selectedAssets count];
+    NSLog(@"%d", self.selectedAssetsURL.count);
+    return [self.selectedAssetsURL count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,12 +61,28 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
 
-    ALAsset *asset = _selectedAssets[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [asset valueForProperty:ALAssetPropertyDate]];
-    [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    NSLog(@"%@", _selectedAssets);
+    NSURL *assetURL = self.selectedAssetsURL[indexPath.row];
+    
+    // ALAssetで取得するとlifetimeが超えてしまい取得出来ないので、assetForURLを使いURLから生成する。
+    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+    [assetsLibrary assetForURL:assetURL
+                  resultBlock:^(ALAsset *asset) {
+                      // 結果取得時に実行されるブロック
+
+                      cell.textLabel.text = [NSString stringWithFormat:@"%@", [asset valueForProperty:ALAssetPropertyDate]];
+                      NSLog(@"%@", cell.textLabel.text);
+                      [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
+                      [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+                      //これを書いておかないと最初にCellが表示する時に表示されない。
+                      [cell layoutSubviews];
+                  }
+                 failureBlock:^(NSError *error) {
+                     // 結果取得時に実行されるブロック
+                     NSLog(@"falt");
+                 }];
     return cell;
+
 }
 
 
